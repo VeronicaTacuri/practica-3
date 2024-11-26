@@ -1,0 +1,23 @@
+import network
+import time
+
+# Configuración de Wi-Fi
+ssid = 'Tu_SSID'         # Nombre de tu red Wi-Fi
+password = 'Tu_Contraseña'  # Contraseña de tu red Wi-Fi
+
+# Configura el ESP32 como cliente Wi-Fi
+sta_if = network.WLAN(network.STA_IF)
+sta_if.active(True)
+
+# Conéctate a la red Wi-Fi
+sta_if.connect(ssid, password)
+
+# Espera hasta que se establezca la conexión
+print("Conectando a la red...")
+while not sta_if.isconnected():
+    time.sleep(1)
+    print("Esperando conexión...")
+
+# Muestra la dirección IP una vez conectado
+print("Conexión exitosa")
+print("Dirección IP:", sta_if.ifconfig()[0])
